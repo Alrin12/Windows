@@ -1,0 +1,39 @@
+<mat-card class="container">
+  <h2 class="header">Sign Up</h2>
+  <form [formGroup]="signUpForm" (ngSubmit)="signUp()" novalidate>
+  <mat-form-field class="input-form">
+    <input matInput type="email" name="userId" formControlName="userId" placeholder="Email address">
+    <mat-icon matSuffix>mail_outline</mat-icon>
+    <mat-error *ngIf="userId.hasError('required')">필수 입력 항목입니다</mat-error>
+    <mat-error *ngIf="!userId.hasError('required') && userId.hasError('email')">이메일 형식에 맞지 않습니다</mat-error>
+  </mat-form-field>
+  <mat-form-field class="input-form">
+    <input matInput type="text" name="firstName" formControlName="firstName" placeholder="First name">
+    <mat-icon matSuffix>person_outline</mat-icon>
+    <mat-error *ngIf="firstName.hasError('required')">필수 입력 항목입니다</mat-error>
+  </mat-form-field>
+  <mat-form-field class="input-form">
+    <input matInput type="text" name="lastName" formControlName="lastName" placeholder="Last name">
+    <mat-icon matSuffix>person_outline</mat-icon>
+    <mat-error *ngIf="lastName.hasError('required')">필수 입력 항목입니다</mat-error>
+  </mat-form-field>
+  <mat-form-field class="input-form">
+    <input matInput type="password" name="password" formControlName="password" placeholder="Password">
+    <mat-icon matSuffix>lock_outline</mat-icon>
+    <mat-error *ngIf="password.hasError('required')">필수 입력 항목입니다</mat-error>
+    <mat-error *ngIf="!password.hasError('required') && password.hasError('pattern')">숫자, 문자, 특수문자를 포함한 8자리 이상의 비밀번호를 입력하세요</mat-error>
+  </mat-form-field>
+  <mat-grid-list cols="5" rowHeight="50px">
+  <mat-grid-tile>
+    <button mat-raised-button [disabled]="signUpForm.invalid" type="submit">가입하기</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button mat-raised-button type="reset">다시 작성</button>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2"></mat-grid-tile>
+  <mat-grid-tile>
+    <button mat-raised-button>돌아가기</button>
+  </mat-grid-tile>
+  </mat-grid-list>
+  </form>
+</mat-card>
