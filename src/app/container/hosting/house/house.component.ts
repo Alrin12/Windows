@@ -4,87 +4,94 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 @Component({
   selector: 'app-house',
   template: `
-  <div class="house-type-container">
-  <div><button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">test</button></div>
+  <div class="Hosting-Form-Container">
+  <div><button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">Toggle Button</button></div>
 
   <mat-horizontal-stepper [linear]="isLinear">
-  <mat-step [stepControl]="firstFormGroup" class="Stepper-Form-Group">
-  <form [formGroup]="firstFormGroup">
-  <ng-template matStepLabel>제공하실 숙소의 정보를 입력해주세요.</ng-template>
-    <h3>등록하실 숙소 종류는 무엇인가요?</h3>
+  <mat-step [stepControl]="representationFormGroup" class="Stepper-Hosting-Form-Group">
+  <form [formGroup]="representationFormGroup">
+
+
+  <!-- Representation 삽입 영역 -->
+
+
+  <button mat-button matStepperNext>다음</button>
+    </form>
+    </mat-step>
+
+    <mat-step [stepControl]="houseFormGroup" class="Stepper-Hosting-Form-Group">
+    <form [formGroup]="houseFormGroup">
+
+    <ng-template matStepLabel>제공하실 숙소의 정보를 입력해주세요.</ng-template>
+    <span><h1>등록하실 숙소 종류는 무엇인가요?</h1></span>
     <br>
-    <div id="type-of-houses">
-      <p>숙소 유형을 집, 호텔, 기타 중에서 골라주세요.</p>
+
+    <div class="house-form type-of-houses">
+      <span><h4>숙소 유형을 골라주세요.</h4></span>
         <mat-form-field>
-        <mat-select placeholder="숙소 유형" [(ngModel)]="typeOfHousesId" [formControl]="houseTypeControl" disableRipple required>
+        <mat-select placeholder="숙소 유형" name="houseTypeControl" formControlName="houseTypeControl" disableRipple required>
           <mat-option *ngFor="let house of typeOfHouses" [value]="house.id">
-          {{ house.type }}
+          {{ house.description }}
           </mat-option>
           </mat-select>
           <mat-error *ngIf="houseTypeControl.hasError('required')">집 유형을 선택해주세요!</mat-error>
         </mat-form-field>
     </div>
 
-    <div id="category-of-houses">
-      <p>숙소의 건물 유형을 알려주세요.</p>
-      <mat-form-field>
-        <mat-select placeholder="하나를 선택해주세요." [formControl]="houseCategoryControl" disableRipple required>
-          <mat-option *ngFor="let building of categoryOfHouses" [value]="building.id">
-          {{ building.category }}
+
+
+
+
+    <div class="house-form type-of-room">
+      <span><h4>게스트가 묵을 방 유형</h4></span>
+       <mat-form-field>
+        <mat-select placeholder="집 전체" name="roomTypeControl" formControlName="roomTypeControl" disableRipple required>
+          <mat-option *ngFor="let room of typeOfRooms" [value]="room.id">
+          {{ room.description }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="houseCategoryControl.hasError('required')">건물 유형을 선택해주세요!</mat-error>
-        </mat-form-field>
-    </div>
-
-    <div id="type-of-room">
-      <p>게스트가 묵을 방 유형</p>
-       <mat-form-field>
-        <mat-select placeholder="집 전체" [formControl]="roomTypeControl" disableRipple required>
-          <mat-option *ngFor="let room of typeOfRooms" [value]="room.id">
-          {{ room.type }}
-          </mat-option>
-          </mat-select>
           <mat-error *ngIf="roomTypeControl.hasError('required')">방 유형을 선택해주세요!</mat-error>
         </mat-form-field>
     </div>
 
-    <div id="house-option">
-      <p>게스트만 사용하도록 만들어진 숙소인가요?</p>
-      <mat-radio-group>
-        <mat-radio-button value="1">예. 게스트용으로 따로 마련된 숙소입니다.</mat-radio-button>
-        <br>
-        <mat-radio-button value="2">아니요. 제 개인 물건이 숙소에 있습니다.</mat-radio-button>
-      </mat-radio-group>
-    </div>
-    <div>
-    <button mat-button matStepperNext>다음</button>
-    </div>
-    </form>
-    </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup" class="stepper-Form-Group">
-    <form [formGroup]="secondFormGroup">
-    <ng-template matStepLabel>숙소에 대한 추가 정보를 입력해주세요.</ng-template>
-    <div id="how-many-guests">
 
-    <div>
-    <span class="how-many-people"><h3>숙소에 얼마나 많은 인원이 숙박할 수 있나요?</h3></span>
-    <div class="count-button"><button mat-mini-fab>-</button><button mat-mini-fab>+</button></div>
-    </div>
+
+    <div id="how-many-guests" class="house-form">
+      <div>
+        <span class="how-many-people-can-stay"><h4>숙소에 얼마나 많은 인원이 숙박할 수 있나요?</h4></span>
+        <div class="count-guest-button"><button mat-mini-fab>-</button><button mat-mini-fab>+</button></div>
+      </div>
     </div>
 
-      <div id="meal-type">
-      <p>제공하실 식사 유형을 골라주세요.</p>
+
+    <div class="house-form meal-type">
+      <span><h3>식사 제공 여부를 골라주세요.</h3></span>
         <mat-form-field>
-        <mat-select placeholder="식사 유형" [formControl]="mealTypeControl" disableRipple required>
-          <mat-option *ngFor="let meal of typeOfMeals" [value]="meal.id">
-          {{ meal.type }}
-          </mat-option>
+          <mat-select placeholder="식사 유형" name="mealTypeControl" formControlName="mealTypeControl" disableRipple required>
+            <mat-option *ngFor="let meal of typeOfMeals" [value]="meal.id">
+            {{ meal.description }}
+            </mat-option>
           </mat-select>
           <mat-error *ngIf="mealTypeControl.hasError('required')">제공하실 식사 유형을 선택해주세요!</mat-error>
         </mat-form-field>
     </div>
+
+
+
+      <div id="facilities-info">
+        <span><h3>숙소의 시설을 입력해주세요.</h3></span>
+        <mat-form-field>
+            <mat-select placeholder="인터넷 제공 여부" name="facilityControl" formControlName="facilityControl" disableRipple required>
+              <mat-option *ngFor="let internetType of provideInternetTypes" [value]="internetType.id">
+              {{ internetType.description }}
+              </mat-option>
+            </mat-select>
+              <mat-error *ngIf="facilityControl.hasError('required')">제공하실 인터넷 유형을 선택해주세요!</mat-error>
+          </mat-form-field>
+      </div>
+
+
       <div>
         <button mat-button matStepperPrevious>이전</button>
         <button mat-button matStepperNext>다음</button>
@@ -92,29 +99,27 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
     </form>
     </mat-step>
 
-   <mat-step [stepControl]="thirdFormGroup" class="stepper-Form-Group">
-    <form [formGroup]="thirdFormGroup">
-    <ng-template matStepLabel>숙소 시설에 대한 정보를 입력해주세요.</ng-template>
-   
-    <div id="facilities-info">
-    <span><h3>숙소의 시설을 입력해주세요.</h3></span>
-    <mat-form-field>
-        <mat-select placeholder="인터넷 제공 여부" [formControl]="facilityControl" disableRipple required>
-          <mat-option *ngFor="let internetType of provideInternetTypes" [value]="internetType.id">
-          {{ internetType.description }}
-          </mat-option>
-          </mat-select>
-          <mat-error *ngIf="facilityControl.hasError('required')">제공하실 인터넷 유형을 선택해주세요!</mat-error>
-        </mat-form-field>
-    </div>
+   <mat-step [stepControl]="addressFormGroup" class="stepper-Form-Group">
+    <form [formGroup]="addressFormGroup">
+
+
+
+
+    <!-- Address 삽입 영역 -->
+
+
+
+
 
     <div>
         <button mat-button matStepperPrevious>이전</button>
         <button mat-button matStepperNext>다음</button>
-      </div>
+    </div>
     </form>
     </mat-step>
     </mat-horizontal-stepper>
+
+
   </div>
 
   <!-- 메시지 형식의 툴팁 -->
@@ -142,65 +147,54 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
     .description-card {
       width: 220px;
     }
-    .count-button {
+    .count-peoplebutton {
       position: relative;
       display: block;
       width: 200px;
       float: left;
       margin-top: 10px;
     }
-    .how-many-people {
+    .how-many-people-can-stay {
       display: block;
       width: 350px;
       float: left;
     }
-    #meal-type {
+    .meal-type {
       clear: left;
     }
   `
   ]
 })
 export class HouseComponent implements OnInit {
-  houseTypeControl = new FormControl('', [Validators.required]);
-  houseCategoryControl = new FormControl('', [Validators.required]);
-  roomTypeControl = new FormControl('', [Validators.required]);
-  mealTypeControl = new FormControl('', [Validators.required]);
-  facilityControl = new FormControl('', [Validators.required]);
+  // houseCategoryControl = new FormControl('', [Validators.required]);
+  // houseTypeControl = new FormControl('', [Validators.required]);
+  // roomTypeControl = new FormControl('', [Validators.required]);
+  // mealTypeControl = new FormControl('', [Validators.required]);
+  // facilityControl = new FormControl('', [Validators.required]);
+
+  // hostingFormGroup: FormGroup;
+  representationFormGroup: FormGroup;
+  houseFormGroup: FormGroup;
+  addressFormGroup: FormGroup;
 
   isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
 
   typeOfHouses = [
-    { id: 1, type: '집' },
-    { id: 2, type: '호텔' },
-    { id: 3, type: '기타' }
-  ];
-
-  categoryOfHouses = [
-    { id: 1, category: '아파트' },
-    { id: 2, category: '게스트하우스' },
-    { id: 3, category: '주택' },
-    { id: 4, category: '별채' },
-    { id: 5, category: '휴가용별장' },
-    { id: 6, category: '오두막' },
-    { id: 7, category: '이글루' },
-    { id: 8, category: '통나무집' },
-    { id: 9, category: '트리하우스' }
+    { id: 1, type: 'Apartment', description: '아파트' },
+    { id: 2, type: 'House', description: '주택' },
+    { id: 3, type: 'Guesthouse', description: '게스트하우스' },
+    { id: 4, type: 'Office', description: '사무실' },
+    { id: 5, type: 'Dormitory', description: '기숙사' }
   ];
 
   typeOfRooms = [
-    { id: 1, type: '집 전체' },
-    { id: 2, type: '개인실' },
-    { id: 3, type: '다인실' }
+    { id: 1, type: 'Private room', description: '개인실' },
+    { id: 2, type: 'Shared room', description: '다인실' }
   ];
 
   typeOfMeals = [
-    { id: 1, type: '제공안함' },
-    { id: 2, type: '양식' },
-    { id: 3, type: '중식' },
-    { id: 4, type: '아시아' }
+    { id: 1, type: 'It\'s a deal! We share a meal!', description: '식사를 제공합니다.' },
+    { id: 2, type: 'Make your dishes using host\'s ingredient', description: '호스트의 재료를 사용해서 직접 요리하세요!' },
   ];
 
   // No Internet이 가장 상단으로 와야함, 옵션 수정 해야함 -> 와이파이와 유선 랜 모두 제공하는 옵션
@@ -210,18 +204,30 @@ export class HouseComponent implements OnInit {
     { id: 3, type: 'No Internet', description: '제공안함' }
   ];
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(public _formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstControl: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondControl: ['', Validators.required]
-    });
-    this.thirdFormGroup = this._formBuilder.group({
-      thirdControl: ['', Validators.required]
+    this.houseFormGroup = this._formBuilder.group({
+      houseTypeControl: ['', Validators.required],
+      roomTypeControl: ['', Validators.required],
+      mealTypeControl: ['', Validators.required],
+      facilityControl: ['', Validators.required]
     });
   }
 
+  get houseTypeControl() {
+    return this.houseFormGroup.get('houseTypeControl');
+  }
+
+  get roomTypeControl() {
+    return this.houseFormGroup.get('roomTypeControl');
+  }
+
+  get mealTypeControl() {
+    return this.houseFormGroup.get('mealTypeControl');
+  }
+
+  get facilityControl() {
+    return  this.houseFormGroup.get('facilityControl');
+  }
 }
