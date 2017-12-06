@@ -1,0 +1,66 @@
+    .profile {
+      position: relative;
+      width: 630px;
+      height: auto;
+      margin-top: 50px;
+    }
+    /* .user-profile-img {
+      display: inline-block;
+      position: absolute;
+      float: left;
+      top: 60px;
+      background-color: gray;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    } */
+
+    .profile-top-content {
+      margin-left: 140px;
+      padding-top: 30px;
+      overflow: hidden;
+      height: auto;
+    }
+
+    .show-rest-user-article-button {
+      display: inline-block;
+    }
+
+    .show-rest-user-article-button:hover {
+      cursor: pointer;
+    }
+
+    .profile-top-user-article {
+      display: inline-block;
+    }
+
+    .profile-top-chips-container {
+      margin-top: 20px;
+    }
+
+    .profile-top-chip-follow, .profile-top-chip-ask {
+      width: 70px;
+    }
+
+    /* 여기까지 프로필 상단 */
+
+    .profile-middle {
+      min-height: 230px;
+    }
+
+    .profile-middle-left-content {
+      position: relative;
+      display: inline-block;
+      font-size: 1.2rem;
+    }
+
+    .profile-middle-right-content {
+      float: right;
+      margin-right: 180px;
+      font-size: 1.2rem;
+      clear: right;
+    }
+
+    .user-resume-list-container, .user-activity-summary-list-container {
+      margin-top: 20px;
+    }
